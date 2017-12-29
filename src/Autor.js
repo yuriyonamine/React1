@@ -97,7 +97,6 @@ class TabelaAutores extends Component {
 export default class AutorBox extends Component {
     constructor() {
         super();
-        console.log("montou");
         this.state = {lista: []};
     }
     
@@ -109,7 +108,7 @@ export default class AutorBox extends Component {
             this.setState({lista:resposta});
           }.bind(this)
         });
-console.log("AE");
+
         PubSub.subscribe('lista-atualiza-autores', function(topico, novaLista){
             this.setState({lista: novaLista});
         }.bind(this));
@@ -117,10 +116,15 @@ console.log("AE");
 
     render() {
         return (
-            <div>
-                <FormularioAutor />
-                <TabelaAutores lista={this.state.lista} />
+        <div>
+            <div className="header">
+              <h1>Cadastro de autores</h1>
             </div>
+            <div className="content" id="content">                            
+                <FormularioAutor/>
+                <TabelaAutores lista={this.state.lista}/>        
+            </div>      
+        </div>
         );
     }
 }
