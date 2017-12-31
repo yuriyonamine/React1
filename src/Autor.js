@@ -11,21 +11,12 @@ class FormularioAutor extends Component {
         super();
         this.state = {nome:'', email:'', senha:''};
         this.enviaForm = this.enviaForm.bind(this);
-        this.setNome = this.setNome.bind(this);
-        this.setEmail = this.setEmail.bind(this);
-        this.setSenha = this.setSenha.bind(this);
     }
 
-    setNome(evento) {
-       this.setState({nome: evento.target.value});
-    }
-    
-    setEmail(evento) {
-       this.setState({email: evento.target.value});
-    }
-    
-    setSenha(evento) {
-       this.setState({senha: evento.target.value});
+    salvaAlteracao(nomeInput, evento){
+        var campoSendoAlterado = {};
+        campoSendoAlterado[nomeInput] = evento.target.value;    
+        this.setState(campoSendoAlterado);   
     }
 
     enviaForm(evento) {
@@ -55,9 +46,9 @@ class FormularioAutor extends Component {
         return (
             <div className="pure-form pure-form-aligned">
                 <form className="pure-form pure-form-aligned" method="post" onSubmit={this.enviaForm}>
-                  <CustomizedInput id="nome" name="nome" label="Nome" type="text" value={this.state.nome} onChange={this.setNome}/>
-                  <CustomizedInput id="email" name="email" label="Email" type="email" value={this.state.email} onChange={this.setEmail}/>
-                  <CustomizedInput id="senha" name="senha" label="Senha" type="password" value={this.state.senha} onChange={this.setSenha}/>              
+                  <CustomizedInput id="nome" name="nome" label="Nome" type="text" value={this.state.nome} onChange={this.salvaAlteracao.bind(this, 'nome')}/>
+                  <CustomizedInput id="email" name="email" label="Email" type="email" value={this.state.email} onChange={this.salvaAlteracao.bind(this, 'email')}/>
+                  <CustomizedInput id="senha" name="senha" label="Senha" type="password" value={this.state.senha} onChange={this.salvaAlteracao.bind(this, 'senha')}/>              
                   <SubmitButton label="Enviar"/>
                 </form>             
             </div>                
